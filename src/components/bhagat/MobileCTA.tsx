@@ -7,6 +7,18 @@ import { formatWhatsAppLink } from "@/lib/utils";
 
 export function MobileCTA() {
   const [callOpen, setCallOpen] = useState(false);
+  const [whatsAppOpen, setWhatsAppOpen] = useState(false);
+  const whatsAppMessage = "Namaste. I would like to book a private visit to BHAGAT JI JEWELS showroom in Chandausi.";
+
+  const toggleCall = () => {
+    setWhatsAppOpen(false);
+    setCallOpen((current) => !current);
+  };
+
+  const toggleWhatsApp = () => {
+    setCallOpen(false);
+    setWhatsAppOpen((current) => !current);
+  };
 
   return (
     <div className="fixed right-0 bottom-0 left-0 z-30 flex border-t border-border bg-bg/95 backdrop-blur-xl md:hidden">
@@ -39,9 +51,40 @@ export function MobileCTA() {
         </div>
       )}
 
+      {whatsAppOpen && (
+        <div id="mobile-whatsapp-options" className="absolute right-3 bottom-[calc(100%+12px)] left-3 border border-border bg-bg-elevated p-3 shadow-2xl">
+          <div className="mb-2 flex items-center justify-between">
+            <span className="text-[10px] font-bold uppercase tracking-[0.24em] text-text-muted">Choose WhatsApp</span>
+            <button
+              type="button"
+              onClick={() => setWhatsAppOpen(false)}
+              className="grid h-8 w-8 place-items-center text-text-muted transition-colors hover:text-text"
+              aria-label="Close WhatsApp options"
+            >
+              <X className="h-4 w-4" />
+            </button>
+          </div>
+          <div className="grid gap-2">
+            {BRAND.whatsapp.map((number, index) => (
+              <a
+                key={number}
+                href={formatWhatsAppLink(number, whatsAppMessage)}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setWhatsAppOpen(false)}
+                className="flex items-center gap-3 border border-border bg-bg px-4 py-3 text-sm text-text transition-colors hover:border-[#25D366]"
+              >
+                <MessageCircle className="h-4 w-4 text-[#25D366]" />
+                <span>{BRAND.phones[index] ?? `+${number}`}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+
       <button
         type="button"
-        onClick={() => setCallOpen((current) => !current)}
+        onClick={toggleCall}
         className="flex flex-1 items-center justify-center gap-2 py-4 text-[10px] tracking-[0.2em] text-text uppercase"
         aria-expanded={callOpen}
         aria-controls="mobile-call-options"
@@ -49,15 +92,16 @@ export function MobileCTA() {
         <Phone className="h-4 w-4 text-gold" />
         Call
       </button>
-      <a
-        href={formatWhatsAppLink(BRAND.whatsapp[0], "Namaste. I would like to book a private visit to BHAGAT JI JEWELS showroom in Chandausi.")}
-        target="_blank"
-        rel="noopener noreferrer"
+      <button
+        type="button"
+        onClick={toggleWhatsApp}
         className="flex flex-1 items-center justify-center gap-2 border-l border-border py-4 text-[10px] tracking-[0.2em] text-text uppercase"
+        aria-expanded={whatsAppOpen}
+        aria-controls="mobile-whatsapp-options"
       >
         <MessageCircle className="h-4 w-4 text-[#25D366]" />
         WhatsApp
-      </a>
+      </button>
     </div>
   );
 }

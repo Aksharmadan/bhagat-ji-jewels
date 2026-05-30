@@ -10,7 +10,7 @@ export function HallmarkSeal() {
   return (
     <>
       {/* Sticky Floating Seal */}
-      <div className="fixed bottom-20 left-6 md:bottom-6 md:left-6 z-40">
+      <div className="fixed bottom-6 left-6 z-40 hidden md:block">
         <button
           onClick={() => setIsOpen(true)}
           className="group flex items-center gap-2 rounded-full bg-gold px-4 py-2.5 text-[10px] font-bold uppercase tracking-widest text-bg shadow-[0_12px_36px_rgba(141,51,52,0.35)] hover:bg-gold-dark hover:shadow-2xl transition-all duration-300 border border-gold-light/20"
