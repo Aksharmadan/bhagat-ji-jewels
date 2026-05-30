@@ -265,25 +265,6 @@ export function CollectionsClient({
                 ))}
               </div>
             </div>
-
-            {/* Filter Section: Collections */}
-            <div>
-              <h3 className="text-[11px] font-bold tracking-wider text-text uppercase mb-3">{t("brandCollection")}</h3>
-              <div className="space-y-1.5 pr-1">
-                {collections.map((coll) => (
-                  <button
-                    key={coll.slug}
-                    onClick={() => setCollection(collection === coll.slug ? null : coll.slug)}
-                    className={`flex w-full items-center justify-between text-xs py-1 transition-colors ${
-                      collection === coll.slug ? "text-accent font-bold" : "text-text-muted hover:text-text"
-                    }`}
-                  >
-                    <span className="truncate">{coll.name}</span>
-                    {collection === coll.slug && <span className="h-1.5 w-1.5 rounded-full bg-accent" />}
-                  </button>
-                ))}
-              </div>
-            </div>
           </aside>
 
           {/* Product Grid and Active Filter Chips */}
@@ -409,24 +390,6 @@ export function CollectionsClient({
                       }`}
                     >
                       {translateLabel(o)}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Collections */}
-              <div>
-                <h4 className="text-[10px] font-bold tracking-widest text-neutral-400 uppercase mb-2">{t("brandCollection")}</h4>
-                <div className="flex flex-wrap gap-2">
-                  {collections.map((coll) => (
-                    <button
-                      key={coll.slug}
-                      onClick={() => setCollection(collection === coll.slug ? null : coll.slug)}
-                      className={`text-xs px-3 py-1.5 border rounded transition-colors ${
-                        collection === coll.slug ? "bg-accent/10 border-accent text-accent font-bold" : "border-border text-text-muted hover:border-text"
-                      }`}
-                    >
-                      {coll.name}
                     </button>
                   ))}
                 </div>
