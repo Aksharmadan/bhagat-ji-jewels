@@ -155,19 +155,19 @@ export function Header() {
           )}
           onMouseLeave={() => setActiveMega(null)}
         >
-          <div className="mx-auto flex max-w-[1500px] items-center justify-between gap-2 overflow-visible px-3 sm:px-6 lg:px-8">
+          <div className="mx-auto flex min-h-[72px] max-w-[1500px] items-center justify-between gap-2 overflow-visible px-3 sm:px-6 lg:min-h-0 lg:px-8">
             {/* Left: Mobile menu toggle + Logo */}
-            <div className="flex items-center gap-3">
+            <div className="flex min-w-0 flex-1 items-center gap-2 sm:gap-3 lg:flex-none">
               <button
                 onClick={() => setOpen(true)}
-                className="flex items-center gap-2 p-2 text-text transition-colors hover:text-accent lg:hidden"
+                className="flex h-11 w-11 shrink-0 items-center justify-center text-text transition-colors hover:text-accent lg:hidden"
                 aria-label="Open menu"
               >
                 <Menu className="h-6 w-6" />
               </button>
               
-              <Link href="/" className="flex items-center gap-2 sm:gap-3">
-                <div className="relative h-9 w-9 sm:h-12 sm:w-12 overflow-hidden rounded-full border border-gold/25 p-0.5 shrink-0">
+              <Link href="/" className="flex min-w-0 items-center gap-2 sm:gap-3">
+                <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full border border-gold/25 p-0.5 min-[380px]:h-11 min-[380px]:w-11 sm:h-12 sm:w-12">
                   <Image
                     src="/logo.png"
                     alt={BRAND.name}
@@ -177,11 +177,11 @@ export function Header() {
                     priority
                   />
                 </div>
-                <div className="flex flex-col">
-                  <span className="font-display text-sm sm:text-base tracking-[0.2em] font-bold text-text uppercase leading-none">
+                <div className="flex min-w-0 flex-col">
+                  <span className="font-display truncate text-[13px] font-bold uppercase leading-none tracking-[0.16em] text-text min-[380px]:text-sm min-[380px]:tracking-[0.2em] sm:text-base">
                     Bhagat Ji
                   </span>
-                  <span className="text-[7px] sm:text-[8px] tracking-[0.35em] text-accent dark:text-gold uppercase font-semibold mt-0.5 sm:mt-1">
+                  <span className="mt-0.5 truncate text-[7px] font-semibold uppercase tracking-[0.28em] text-accent min-[380px]:tracking-[0.35em] dark:text-gold sm:mt-1 sm:text-[8px]">
                     Jewels
                   </span>
                 </div>
@@ -217,7 +217,7 @@ export function Header() {
             </nav>
 
             {/* Right: Search, Wishlist, Themes & Settings */}
-            <div className="flex shrink-0 items-center gap-1.5 sm:gap-2 text-neutral-700 dark:text-neutral-200">
+            <div className="flex min-w-0 shrink-0 items-center gap-1 text-neutral-700 dark:text-neutral-200 sm:gap-2">
               {/* Search trigger or bar */}
               <form action="/collections" className="relative hidden 2xl:block w-64">
                 <Search size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-neutral-400" />
@@ -229,7 +229,7 @@ export function Header() {
               </form>
 
               {/* Wishlist Link with Badge */}
-              <Link href="/wishlist" aria-label="Wishlist" className="relative shrink-0 p-2 hover:text-accent transition-colors">
+              <Link href="/wishlist" aria-label="Wishlist" className="relative hidden shrink-0 p-2 transition-colors hover:text-accent min-[390px]:block">
                 <Heart size={20} className={cn(wishlist.length > 0 ? "fill-rose-500 text-rose-500" : "")} />
                 {wishlist.length > 0 && (
                   <span className="absolute top-0 right-0 grid h-4 w-4 place-items-center rounded-full bg-rose-500 text-[8px] font-bold text-white shadow-sm animate-scale-in">
@@ -246,7 +246,7 @@ export function Header() {
               {/* Theme toggle */}
               <button
                 onClick={toggleTheme}
-                className="inline-flex shrink-0 items-center gap-2 rounded-full border border-gold/45 bg-bg-elevated px-3 py-2 text-[10px] font-bold uppercase tracking-wider text-text shadow-[0_8px_24px_rgba(0,0,0,0.08)] transition-all hover:border-gold hover:bg-gold/10 hover:text-gold dark:bg-neutral-950 dark:text-gold-light dark:shadow-[0_0_26px_rgba(212,175,55,0.16)]"
+                className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-gold/45 bg-bg-elevated text-[10px] font-bold uppercase tracking-wider text-text shadow-[0_8px_24px_rgba(0,0,0,0.08)] transition-all hover:border-gold hover:bg-gold/10 hover:text-gold dark:bg-neutral-950 dark:text-gold-light dark:shadow-[0_0_26px_rgba(212,175,55,0.16)] lg:w-auto lg:px-3 lg:py-2"
                 title={`${theme === "light" ? t("dark") : t("light")} Mode`}
                 aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
               >
@@ -259,7 +259,7 @@ export function Header() {
                 <button
                   type="button"
                   onClick={() => setLangOpen((current) => !current)}
-                  className="inline-flex h-11 min-w-12 items-center justify-center rounded-lg border border-border bg-bg-elevated px-3 text-[11px] font-bold uppercase tracking-wider text-text shadow-sm transition-colors hover:border-gold hover:bg-gold/10 hover:text-gold"
+                  className="inline-flex h-11 min-w-11 items-center justify-center rounded-lg border border-border bg-bg-elevated px-2 text-[11px] font-bold uppercase tracking-wider text-text shadow-sm transition-colors hover:border-gold hover:bg-gold/10 hover:text-gold sm:min-w-12 sm:px-3"
                   aria-haspopup="menu"
                   aria-expanded={langOpen}
                   aria-label="Change language"
@@ -292,7 +292,9 @@ export function Header() {
               </div>
 
               {/* Audio controls */}
-              <AudioSoundscape />
+              <div className="max-[370px]:hidden">
+                <AudioSoundscape />
+              </div>
             </div>
           </div>
 
@@ -454,21 +456,30 @@ export function Header() {
               transition={{ type: "tween", duration: 0.3 }}
               className="custom-scroll h-full w-[min(94vw,980px)] overscroll-contain overflow-y-auto bg-bg shadow-2xl"
             >
-              <div className="grid min-h-full md:grid-cols-[260px_1fr_1.45fr]">
+              <div className="grid min-h-full md:grid-cols-[270px_1fr_1.45fr]">
                 <div className="border-r border-border bg-bg px-7 py-7 md:px-9">
                   <button
                     onClick={() => setOpen(false)}
-                    className="mb-12 inline-flex items-center gap-3 text-sm font-bold tracking-[0.28em] text-text uppercase"
+                    className="mb-8 inline-flex items-center gap-3 text-sm font-bold tracking-[0.28em] text-text uppercase"
                     aria-label="Close menu"
                   >
                     <X className="h-5 w-5" /> Close
                   </button>
 
+                  <Link
+                    href="/store-locator"
+                    onClick={() => setOpen(false)}
+                    className="mb-8 flex items-center justify-between border border-gold/45 bg-gold/10 px-4 py-4 text-xs font-bold uppercase tracking-[0.22em] text-text transition-colors hover:border-gold hover:text-accent"
+                  >
+                    <span>Store Locator</span>
+                    <MapPin className="h-4 w-4 text-gold" />
+                  </Link>
+
                   <nav className="space-y-0">
                     {[
                       ["Collection", "/collections"],
                       ["Favorites", "/wishlist"],
-                      ["Find Store", "/store-locator"],
+                      ["Store Locator", "/store-locator"],
                       ["About Us", "/about"],
                       ["Terms of Service", "/about"],
                       ["Privacy Policy", "/about"],

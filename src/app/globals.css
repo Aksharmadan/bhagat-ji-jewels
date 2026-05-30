@@ -120,6 +120,16 @@ body {
   transition: background-color 0.5s ease, color 0.5s ease;
 }
 
+section[id] {
+  scroll-margin-top: 170px;
+}
+
+@media (max-width: 767px) {
+  section[id] {
+    scroll-margin-top: 150px;
+  }
+}
+
 ::selection {
   background: rgba(201, 169, 110, 0.3);
   color: var(--text);
